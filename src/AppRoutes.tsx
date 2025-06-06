@@ -80,7 +80,7 @@ const AppRoutes = () => {
           }
         />
 
-        {/* ✅ Historial de órdenes */}
+        {/* Historial de órdenes */}
         <Route
           path="/orders"
           element={
