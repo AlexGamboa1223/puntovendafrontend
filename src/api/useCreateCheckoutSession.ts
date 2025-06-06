@@ -10,7 +10,7 @@ export const createCheckoutSession = async (
   cartItems: CartItem[]
 ): Promise<string> => {
   const response = await axios.post<CheckoutSessionResponse>(
-    "http://localhost:3000/api/orders/create-checkout-session",
+    `${import.meta.env.VITE_API_BASE_URL}/orders/create-checkout-session`,
     { cartItems },
     {
       headers: {
