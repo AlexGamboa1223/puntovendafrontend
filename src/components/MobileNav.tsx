@@ -1,9 +1,10 @@
 // src/components/MobileNavLinks.tsx
 import { Link } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
+import { Button } from "./ui/button";
 
 export default function MobileNavLinks() {
-  const { isAuthenticated } = useAuth0();
+  const { isAuthenticated, loginWithRedirect } = useAuth0();
 
   return (
     <nav className="flex flex-col gap-4 p-4">
@@ -11,7 +12,7 @@ export default function MobileNavLinks() {
         Inicio
       </Link>
 
-      {isAuthenticated && (
+      {isAuthenticated ? (
         <>
           <Link to="/products" className="text-blue-600 font-medium hover:underline">
             Productos
@@ -26,6 +27,14 @@ export default function MobileNavLinks() {
             Perfil
           </Link>
         </>
+      ) : (
+        <Button
+          variant="ghost"
+          className="text-blue-600 font-medium text-left"
+          onClick={async () => await loginWithRedirect()}
+        >
+          Iniciar sesión
+        </Button>
       )}
     </nav>
   );
