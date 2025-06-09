@@ -12,7 +12,7 @@ type Product = {
 };
 
 type OrderItem = {
-  product: Product;
+  product: Product | null;
   quantity: number;
 };
 
@@ -82,17 +82,26 @@ export default function OrdersPage() {
             </div>
 
             <ul className="divide-y">
-              {order.items.map((item) => (
-                <li key={item.product._id} className="py-2 flex justify-between">
-                  <div>
-                    <p className="font-medium">{item.product.name}</p>
-                    <p className="text-sm text-gray-500">
-                      {item.quantity} x ${item.product.price.toFixed(2)}
-                    </p>
-                  </div>
-                  <p className="font-semibold">
-                    ${(item.product.price * item.quantity).toFixed(2)}
-                  </p>
+              {order.items.map((item, index) => (
+                <li key={item.product?._id || index} className="py-2 flex justify-between">
+                  {item.product ? (
+                    <div className="flex justify-between w-full">
+                      <div>
+                        <p className="font-medium">{item.product.name}</p>
+                        <p className="text-sm text-gray-500">
+                          {item.quantity} x ${item.product.price.toFixed(2)}
+                        </p>
+                      </div>
+                      <p className="font-semibold">
+                        ${(item.product.price * item.quantity).toFixed(2)}
+                      </p>
+                    </div>
+                  ) : (
+                    <div className="flex justify-between w-full text-red-600">
+                      <span className="font-medium">Producto no disponible</span>
+                      <span className="text-sm">{item.quantity} x ---</span>
+                    </div>
+                  )}
                 </li>
               ))}
             </ul>
