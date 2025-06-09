@@ -11,7 +11,7 @@ export const getProducts = async (token: string): Promise<Product[]> => {
   return res.data;
 };
 
-// ✅ Corregido: ya no usamos FormData, solo JSON
+
 export const createProduct = async (product: Omit<Product, "_id">, token: string): Promise<Product> => {
   const res = await axios.post<Product>(`${API_URL}/products`, product, {
     headers: {
