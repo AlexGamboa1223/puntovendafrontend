@@ -35,7 +35,7 @@ export default function OrdersPage() {
 
         const token = await getAccessTokenSilently();
         const res = await axios.get<Order[]>(
-          `${import.meta.env.VITE_API_BASE_URL}/api/orders`,
+          `${import.meta.env.VITE_API_BASE_URL}/orders`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
